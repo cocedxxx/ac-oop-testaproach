@@ -1,0 +1,12 @@
+!!support.Config
+browser: chrome;
+isHeadless: false
+implicitTimeout: 5
+pageLoadTimeout: 300
+explicitTimeout: 5
+supportedOsList:
+  - mac
+  - win
+admin:
+  email: qa.sofi@gmail.com
+  password: 12345
