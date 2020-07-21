@@ -53,7 +53,7 @@ public class TestContext {
     }
     public static Config getConfig(){
         try {
-            String configPath = System.getProperty("user.dir") + "scr/test/resources/data/config.yml";
+            String configPath = System.getProperty("user.dir") + "/src/test/resources/data/config.yml";
             return new Yaml().load(new FileInputStream(new File(configPath)));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
