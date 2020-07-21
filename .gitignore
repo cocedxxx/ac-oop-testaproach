@@ -1,11 +1,4 @@
 .idea/
 target/
 *.iml
-chromedriver
-chromedriver.exe
-geckodriver
-geckodriver.exe
-pom.xml
-workspace.xml
-README.md
-dependency-reduced-pom.xml
+
