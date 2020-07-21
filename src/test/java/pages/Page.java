@@ -4,6 +4,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -16,6 +17,11 @@ public abstract class Page {
     protected String url;
     protected String title;
 
+    @FindBy(xpath = "//span[contains(text(),'Log Out')]")
+    private WebElement buttonLogOut;
+
+    @FindBy(xpath = "//span[contains(text(),'No, Thanks')]")
+    private WebElement buttonNoThanks;
 
     public Page() {
         PageFactory.initElements(getDriver(), this);
