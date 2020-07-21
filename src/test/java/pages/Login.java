@@ -3,7 +3,7 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AssesmentLogin extends Page {
+public class Login extends Page {
     @FindBy(xpath = "//input[@formcontrolname='email']")
     private WebElement fieldEmail;
 
