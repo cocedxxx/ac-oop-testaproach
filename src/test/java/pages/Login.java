@@ -25,5 +25,8 @@ public class Login extends Page {
     @FindBy(xpath = "//span[contains(text(),'Register Now')]")
     private WebElement buttonRegisteNow;
 
+    @FindBy(xpath = "//*[contains(text(),'Authentication failed')]")
+    private WebElement barAuthenticatioFailed;
+
 
 }
