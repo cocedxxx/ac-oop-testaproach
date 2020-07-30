@@ -7,54 +7,42 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static support.TestContext.getDriver;
+import static support.TestContext.upperCaseAllFirstCharacter;
 
 public class Registration extends Page {
 
+// -- FIELDS --
     public Registration (){
         url = "http://ask-qa.portnov.com/#/registration";
     }
-
-    @FindBy(xpath = "//input[@placeholder='First Name']")
-    private WebElement fieldFname;
-
-    @FindBy(xpath = "//input[@placeholder='Last Name']")
-    private WebElement fieldLname;
-
-    @FindBy(xpath = "//input[@placeholder='Email']")
-    private WebElement fieldEmail;
-
-    @FindBy(xpath = "//input[@placeholder='Group Code']")
-    private WebElement fieldGroup;
-
-    @FindBy(xpath = "//input[@placeholder='Password']")
-    private WebElement fieldPassword;
-
-    @FindBy(xpath = "//input[@placeholder='Confirm Password']")
-    private WebElement fieldConfPassword;
 
     @FindBy(xpath = "//span[contains(text(),'Register Me')]")
     private WebElement buttonRegister;
 
     @FindBy(xpath = "//span[contains(text(),'Back to Login')]")
     private WebElement buttonBackLoging;
-//OR
 
-//    @When("I type {string} {string}")
-//    public void iType(String arg0, String arg1) {
-//        char[] array = arg0.toCharArray();
-//        array[0] = Character.toUpperCase(array[0]);
-//        for (int i = 1; i < array.length; i++) {
-//            if (Character.isWhitespace(array[i - 1])) {
-//                array[i] = Character.toUpperCase(array[i]);
-//            }
-//        }
-//        arg0 = new String(array);
-//
-//        getDriver().findElement(By.xpath("//*[contains(@placeholder,'" + arg0 + "')]")).sendKeys(arg1);
-//    }
-//    @And("I type {string} {string} on registration page")
-//    public void iTypeOnRegistrationPage(String arg0, String arg1) {
-//        iType(arg0,arg1);
-//    }
+    @FindBy(xpath = "//mat-error[@role='alert']")
+    private WebElement errMessage;
+
+    private WebElement regisFields(String nameOfField) {
+        return getDriver().findElement(By.xpath("//*[contains(@placeholder,'" + nameOfField + "')]"));
+    }
+
+    //mat-error[@role='alert']
+// -- METHODS --
+
+    public void fillRegFields(String data, String nameOfField){
+        String regFields = upperCaseAllFirstCharacter(nameOfField);
+        sendKeysSafe(regisFields(regFields), data);
+    }
+
+    public void clickRegisterButton(){
+        buttonRegister.click();
+    }
+
+    public String getErrMessage(){
+        return errMessage.getText();
+    }
 
 }

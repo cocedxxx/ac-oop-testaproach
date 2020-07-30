@@ -1,55 +1,54 @@
 Feature: Registration
   Scenario: First name latin characters
     Given I open "registration" page
-    When I type first name "Abc"
-    And I type last name "Tests"
-    And I type email "jggg@mail.ru" on registration page
-    And I type group code "123"
-    And I type password "12345" on registration page
-    And I type confirm password "12345"
+    When I type "latin characters" into "first name" field
+    And I type "last name" into "last name" field
+    And I type "mail" into "email" field
+    And I type "group code" into "group code" field
+    And I type "valid password" into "password" field
+    And I type "valid password" into "confirm password" field
     And I click Register Me button
-    Then Text "You have been Registered." appears
+    Then registration confirmation page is open
 
   Scenario: First name field is required
     Given I open "registration" page
-    When I type first name ""
-    And I type last name "Tests"
-    And I type email "jg@mail.ru" on registration page
-    And I type group code "123"
-    And I type password "12345" on registration page
-    And I type confirm password "12345"
+    When I type "last name" into "last name" field
+    And I type "mail" into "email" field
+    And I type "group code" into "group code" field
+    And I type "valid password" into "password" field
+    And I type "valid password" into "confirm password" field
     And I click Register Me button
-    Then Text "This field is required" appears
+    Then Message "This field is required" appears
 
   Scenario: First Name - min 1 char
     Given I open "registration" page
-    When I type first name "A"
-    And I type last name "Tests"
-    And I type email "jg@mail.ru" on registration page
-    And I type group code "123"
-    And I type password "12345" on registration page
-    And I type confirm password "12345"
+    When I type "one char" into "first name" field
+    And I type "last name" into "last name" field
+    And I type "mail" into "email" field
+    And I type "group code" into "group code" field
+    And I type "valid password" into "password" field
+    And I type "valid password" into "confirm password" field
     And I click Register Me button
-    Then Text "You have been Registered." appears
+    Then registration confirmation page is open
 
   Scenario: First Name - Max 254 when last name 1
     Given I open "registration" page
-    When I type first name "asfasfasfdasfdasdfasfdasfasfasfasfdasfdasdfasfdasfasfasfasfdasfdasdfasfdasfasfasfasfdasfdasdfasfdasfasfasfasfdasfdasdfasfdasfasfasfasfdasfdasdfasfdasfasfasfasfdasfdasdfasfdasfasfasfasfdasfdasdfasfdasfasfasfasfdasfdasdfasfdasfasfasfasfdasfdasdfasfdasfeeee"
-    And I type last name "T"
-    And I type email "jg@mail.ru" on registration page
-    And I type group code "123"
-    And I type password "12345" on registration page
-    And I type confirm password "12345"
+    When I type "254 max characters" into "first name" field
+    And I type "one char" into "last name" field
+    And I type "mail" into "email" field
+    And I type "group code" into "group code" field
+    And I type "valid password" into "password" field
+    And I type "valid password" into "confirm password" field
     And I click Register Me button
-    Then Text "You have been Registered." appears
+    Then registration confirmation page is open
 
   Scenario: First Name - Whitespaces
     Given I open "registration" page
-    When I type first name " Name"
-    And I type last name "Test"
-    And I type email "jg@mail.ru" on registration page
-    And I type group code "123"
-    And I type password "12345" on registration page
-    And I type confirm password "12345"
+    When I type "whitespaces" into "first name" field
+    And I type "last name" into "last name" field
+    And I type "mail" into "email" field
+    And I type "group code" into "group code" field
+    And I type "valid password" into "password" field
+    And I type "valid password" into "confirm password" field
     And I click Register Me button
-    Then Text "Whitespaces not allowed" appears
+    Then Message "Whitespaces are not allowed" appears
