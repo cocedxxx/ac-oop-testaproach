@@ -6,10 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.Login;
-import pages.Page;
-import pages.Registration;
-import pages.SideMenu;
+import pages.*;
 import support.QueryDB;
 
 import java.util.Map;
@@ -42,7 +39,7 @@ public class AssessmentOOPDef {
                 break;
         }
     }
-
+//LOGIN STEPS
     @When("I type {string} into email field")
     public void iTypeIntoEmailField(String mails) {
         switch (mails){
@@ -134,5 +131,62 @@ public class AssessmentOOPDef {
                 throw new RuntimeException("provided incorrect message");
         }
 
+    }
+
+//REGISTRATION STEPS
+
+    @When("I type {string} into {string} field")
+    public void iTypeIntoField(String name, String fieldName) {
+        switch (fieldName){
+            case "first name":
+                if (name.contains("latin characters")){
+                    pRegist.fillRegFields(data.get("latin"), fieldName);
+                }else if (name.contains("one char")){
+                    pRegist.fillRegFields(data.get("latin1"), fieldName);
+                }else if (name.contains("254 max characters")){
+                    pRegist.fillRegFields(data.get("latin254"), fieldName);
+                }else if (name.contains("whitespaces")){
+                    pRegist.fillRegFields(data.get("whiteSpace"), fieldName);
+                }
+
+                break;
+            case "last name":
+                if (name.contains("one char")){
+                    pRegist.fillRegFields(data.get("latin1"), fieldName);
+                }else if (name.contains("last name")){
+                    pRegist.fillRegFields(data.get("rLastName"), fieldName);
+                }
+
+                break;
+            case "email":
+                pRegist.fillRegFields(data.get("rMail"), fieldName);
+                break;
+            case "group code":
+                pRegist.fillRegFields(data.get("rGroup"), fieldName);
+                break;
+            case "password":
+                pRegist.fillRegFields(data.get("validPass"), fieldName);
+                break;
+            case "confirm password":
+                pRegist.fillRegFields(data.get("validPass"), fieldName);
+                break;
+            default:
+                throw new RuntimeException("provided incorrect field");
+        }
+    }
+
+    @And("I click Register Me button")
+    public void iClickRegisterMeButton() {
+        pRegist.clickRegisterButton();
+    }
+
+    @Then("registration confirmation page is open")
+    public void registrationConfirmationPageIsOpen() {
+        assertThat(new RegistrationConfirmation().isRegisConfirm()).isTrue();
+    }
+
+    @Then("Message {string} appears")
+    public void messageAppears(String message) {
+        assertThat(pRegist.getErrMessage()).containsIgnoringCase(message);
     }
 }
