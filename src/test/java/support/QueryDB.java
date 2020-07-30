@@ -1,4 +1,4 @@
-package pages;
+package support;
 
 import java.sql.*;
 
@@ -19,7 +19,7 @@ public class QueryDB {
         Statement statment = null;
         ResultSet result = null;
 
-        String url = "jdbc:mysql://24.4.202.10:3307/Assessment controll/application";// I think problem is here
+        String url = "jdbc:mysql://24.4.202.10:3307/Assessment controll/application/users"; // I think problem is here
         String user = "testuser";
         String password = "password";
         try{
