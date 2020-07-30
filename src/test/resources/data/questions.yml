@@ -1,0 +1,51 @@
+quize:
+  titleQuizeTx: Textual questions
+    question1:
+    question2:
+    question3:
+    points: 5
+
+  titleQuizeSc: Single choice
+    question1: Single choice Question one
+      option1: answer1
+      option2: answer2
+      option3: answer3
+      isShowStoper: yes
+      isOtherText: yes
+      points: 1
+    question2: Single choice Question two
+      option1: answer1
+      option2: answer2
+      option3: answer3
+      isShowStoper: no
+      isOtherText: no
+      points: 5
+    question3: Single choice Questio tree
+      option1: answer1
+      option2: answer2
+      option3: answer3
+      isShowStoper: yes
+      isOtherText: no
+      points: 10
+
+  titleQuizeMc: Multiply choice
+    question1: Multiply choice Question one
+      option1: answer1
+      option2: answer2
+      option3: answer3
+      isOtherText: yes
+      points: 1
+    question2: Multiply choice Question two
+      option1: answer1
+      option2: answer2
+      option3: answer3
+      isOtherText: no
+      points: 5
+    question3: Multiply choice Question tree
+      option1: answer1
+      option2: answer2
+      option3: answer3
+      isOtherText: yes
+      points: 10
+
+  passingPercentage: 75

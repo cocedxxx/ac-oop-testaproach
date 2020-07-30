@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.Map;
 import java.util.logging.Level;
 
 import static java.util.logging.Logger.getLogger;
@@ -26,6 +27,7 @@ public abstract class Page {
     public Page() {
         PageFactory.initElements(getDriver(), this);
     }
+
     public void open() {
         getDriver().get(url);
     }

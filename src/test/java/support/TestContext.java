@@ -3,6 +3,7 @@ package support;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
@@ -16,25 +17,59 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class TestContext {
 
     private static WebDriver driver;
-//    private static String timestamp;
-//    private static Map<String,Object> testData = new HashMap<>();
 
     public static WebDriver getDriver(){
         return driver;
     }
+
+    public static WebDriverWait getWait(){
+        return getWait(getConfig().explicitTimeout);
+    }
+
+    public static WebDriverWait getWait(int timeout) {
+        return new WebDriverWait(driver, timeout);
+    }
+
+    public static String upperCaseAllFirstCharacter(String text) {
+        String regex = "\\b(.)(.*?)\\b";
+        String result = Pattern.compile(regex).matcher(text).replaceAll(
+                matche -> matche.group(1).toUpperCase() + matche.group(2)
+        );
+        return result;
+    }
+    public static Map<String, String > getData(String fileName){
+        try{
+            String path = System.getProperty("user.dir") + "/src/test/resources/data/" + fileName + ".yml";
+            File file = new File(path);
+            InputStream stream = new FileInputStream(file);
+            Yaml yaml = new Yaml();
+            return yaml.load(stream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+//            Logger.getLogger(YamlLoader.class.getName()).log(Level.SEVERE,null,ex);
+//            throw new ImportException("Failed to load yaml object");
+            return null;
+        }
+    }
+
+
+//    private static String timestamp;
+//    private static Map<String,Object> testData = new HashMap<>();
+
+
+
 //    public static void setTimestamp(){
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("+yyyy-MM-dd-h-mm-sss");
 //        timestamp = dateFormat.format(new Date());
@@ -45,12 +80,7 @@ public class TestContext {
     public static Actions getActions(){
         return new Actions(driver);
     }
-    public static WebDriverWait getWait(){
-        return getWait(getConfig().explicitTimeout);
-    }
-    public static WebDriverWait getWait(int timeout) {
-        return new WebDriverWait(driver, timeout);
-    }
+
     public static Config getConfig(){
         try {
             String configPath = System.getProperty("user.dir") + "/src/test/resources/data/config.yml";
@@ -88,6 +118,7 @@ public class TestContext {
                     chromeOptions.addArguments("--start-maximized");
                     chromeOptions.setExperimentalOption("prefs", chromePreferences);
                     System.setProperty("webdriver.chrome.silentOutput", "true");
+//                    System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
                     if (isHeadless) {
                         chromeOptions.setHeadless(true);
                         chromeOptions.addArguments("--window-size=1920,1080");
