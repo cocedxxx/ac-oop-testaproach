@@ -141,22 +141,30 @@ public class AssessmentOOPDef {
             case "first name":
                 if (name.contains("latin characters")){
                     pRegist.fillRegFields(data.get("latin"), fieldName);
-                }else if (name.contains("one char")){
+                }else if (name.equalsIgnoreCase("one char")){
                     pRegist.fillRegFields(data.get("latin1"), fieldName);
-                }else if (name.contains("254 max characters")){
+                }else if (name.equalsIgnoreCase("254 max characters")){
                     pRegist.fillRegFields(data.get("latin254"), fieldName);
-                }else if (name.contains("whitespaces")){
+                }else if (name.equalsIgnoreCase("whitespaces")){
                     pRegist.fillRegFields(data.get("whiteSpace"), fieldName);
+                }else if (name.equalsIgnoreCase("first name")){
+                    pRegist.fillRegFields(data.get("rFirstName"), fieldName);
                 }
-
                 break;
             case "last name":
                 if (name.contains("one char")){
                     pRegist.fillRegFields(data.get("latin1"), fieldName);
-                }else if (name.contains("last name")){
+                }else if (name.equalsIgnoreCase("last name")){
                     pRegist.fillRegFields(data.get("rLastName"), fieldName);
+                }else if (name.equalsIgnoreCase("latin characters")){
+                    pRegist.fillRegFields(data.get("latin"), fieldName);
+                }else if (name.equalsIgnoreCase("254 max characters")) {
+                    pRegist.fillRegFields(data.get("latin254"), fieldName);
+                }else if (name.equalsIgnoreCase("255 max characters")) {
+                    pRegist.fillRegFields(data.get("latin255"), fieldName);
+                }else if (name.equalsIgnoreCase("last name with space")) {
+                    pRegist.fillRegFields(data.get("trailSpace"), fieldName);
                 }
-
                 break;
             case "email":
                 pRegist.fillRegFields(data.get("rMail"), fieldName);
@@ -188,5 +196,10 @@ public class AssessmentOOPDef {
     @Then("Message {string} appears")
     public void messageAppears(String message) {
         assertThat(pRegist.getErrMessage()).containsIgnoringCase(message);
+    }
+
+    @Then("Message {string} appears on the bottom")
+    public void messageAppearsOnTheBottom(String message) {
+        assertThat(pRegist.errMessageBar()).isTrue();
     }
 }

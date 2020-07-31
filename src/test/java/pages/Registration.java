@@ -6,8 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static support.TestContext.getDriver;
-import static support.TestContext.upperCaseAllFirstCharacter;
+import static support.TestContext.*;
 
 public class Registration extends Page {
 
@@ -25,11 +24,13 @@ public class Registration extends Page {
     @FindBy(xpath = "//mat-error[@role='alert']")
     private WebElement errMessage;
 
+    @FindBy(xpath = "//snack-bar-container[@role='alert']/.//*[contains(text(),'Data too long')]")
+    private WebElement barMessage;
+
     private WebElement regisFields(String nameOfField) {
         return getDriver().findElement(By.xpath("//*[contains(@placeholder,'" + nameOfField + "')]"));
     }
 
-    //mat-error[@role='alert']
 // -- METHODS --
 
     public void fillRegFields(String data, String nameOfField){
@@ -45,4 +46,8 @@ public class Registration extends Page {
         return errMessage.getText();
     }
 
+    public boolean errMessageBar(){
+        getWait().until(driver -> barMessage.isDisplayed());
+        return true;
+    }
 }
