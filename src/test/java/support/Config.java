@@ -11,4 +11,7 @@ public class Config {
     public int explicitTimeout;
     public List<String> supportedOsList;
     public Map<String, String>admin;
+    public String dataBaseUrl;
+    public String dataBaseUser;
+    public String dataBasePass;
 }

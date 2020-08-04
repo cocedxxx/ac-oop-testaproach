@@ -25,7 +25,8 @@ public class AssessmentOOPDef {
     @Given("I run script")
     public void iRunScript() {
         QueryDB doQuery = new QueryDB();
-        doQuery.getDBQuery();
+        String res = doQuery.getDBQuery("SELECT * FROM users WHERE ID = 7754;", "activationCode");
+        System.out.println(res);
     }
 
     @Given("I open {string} page")

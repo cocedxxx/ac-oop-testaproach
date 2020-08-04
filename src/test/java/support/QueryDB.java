@@ -2,6 +2,8 @@ package support;
 
 import java.sql.*;
 
+import static support.TestContext.getConfig;
+
 // i use this library in pom file for my framework
 //<dependency>
 //            <groupId>mysql</groupId>
@@ -11,30 +13,21 @@ import java.sql.*;
 
 public class QueryDB {
 
-    //Probably its better to put it into class TestContext
-
-    public void getDBQuery(){
-
+    public String getDBQuery(String querySelect, String fieldName){
         Connection conection = null;
         Statement statment = null;
         ResultSet result = null;
 
-        String url = "jdbc:mysql://24.4.202.10:3307/Assessment controll/application/users"; // I think problem is here
-        String user = "testuser";
-        String password = "password";
+        String url = getConfig().dataBaseUrl;
+        String user = getConfig().dataBaseUser;
+        String password = getConfig().dataBasePass;
         try{
             conection = DriverManager.getConnection(url, user, password);
             statment = conection.createStatement();
-            result = statment.executeQuery("SELECT * FROM users;");
-
-//            if(result.next()){
-//                System.out.println(result.getString(1));
-//            }
-            while(result.next())
-            {
-                System.out.println(result.getString("Colomn_Name"));//or getString(1) for coloumn 1 etc
+            result = statment.executeQuery(querySelect);
+            while(result.next()) {
+                return result.getString(fieldName);
             }
-
         }catch (SQLException ex){
 
 //            Logger lgr = Logger.getLogger(Version.class.getName());
@@ -61,7 +54,6 @@ public class QueryDB {
                 ex.printStackTrace();
             }
         }
-
+        return null;
     }
-
 }
