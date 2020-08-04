@@ -168,7 +168,27 @@ public class AssessmentOOPDef {
                 }
                 break;
             case "email":
-                pRegist.fillRegFields(data.get("rMail"), fieldName);
+                if (name.equalsIgnoreCase("valid mail")) {
+                    pRegist.fillRegFields(data.get("rMail"), fieldName);
+                }else if (name.equalsIgnoreCase("email max char 64")) {
+                    pRegist.fillRegFields(data.get("emailLocalLeft64"), fieldName);
+                }else if (name.equalsIgnoreCase("email max char 65")) {
+                    pRegist.fillRegFields(data.get("emailLocalLeft65"), fieldName);
+                }else if (name.equalsIgnoreCase("email max char 63 for server domain")){
+                    pRegist.fillRegFields(data.get("emailServerDomain63"), fieldName);
+                }else if (name.equalsIgnoreCase("email max char 64 for server domain")){
+                    pRegist.fillRegFields(data.get("emailServerDomain64"), fieldName);
+                }else if (name.equalsIgnoreCase("email max char 63 for domain")){
+                    pRegist.fillRegFields(data.get("emailDomain63"), fieldName);
+                }else if (name.equalsIgnoreCase("email max char 64 for domain")){
+                    pRegist.fillRegFields(data.get("emailDomain64"), fieldName);
+                }else if (name.equalsIgnoreCase("whitespaces")){
+                    pRegist.fillRegFields(data.get("whiteSpace"), fieldName);
+                }else if (name.equalsIgnoreCase("email without @")){
+                    pRegist.fillRegFields(data.get("emailInvAt"), fieldName);
+                }else if (name.equalsIgnoreCase("email without dot")){
+                    pRegist.fillRegFields(data.get("emailInvDot"), fieldName);
+                }
                 break;
             case "group code":
                 pRegist.fillRegFields(data.get("rGroup"), fieldName);

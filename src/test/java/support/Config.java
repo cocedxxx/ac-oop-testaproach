@@ -14,4 +14,5 @@ public class Config {
     public String dataBaseUrl;
     public String dataBaseUser;
     public String dataBasePass;
+
 }

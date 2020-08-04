@@ -1,3 +1,4 @@
+@registration
 Feature: Registration first name
   Scenario: First name latin characters
     Given I open "registration" page

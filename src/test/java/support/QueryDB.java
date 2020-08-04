@@ -13,7 +13,8 @@ import static support.TestContext.getConfig;
 
 public class QueryDB {
 
-    public String getDBQuery(String querySelect, String fieldName){
+    public String  getDBQuery(String querySelect, String fieldName){
+
         Connection conection = null;
         Statement statment = null;
         ResultSet result = null;

@@ -1,3 +1,4 @@
+@registration
 Feature: Registration - Last Name
   Scenario: Last Name allowable Latin characters.
     Given I open "registration" page
