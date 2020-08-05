@@ -191,13 +191,51 @@ public class AssessmentOOPDef {
                 }
                 break;
             case "group code":
-                pRegist.fillRegFields(data.get("rGroup"), fieldName);
+                if (name.equalsIgnoreCase("alphanumeric char")){
+                    pRegist.fillRegFields(data.get("alfanumeric"), fieldName);
+                }else if (name.equalsIgnoreCase("alphanumeric with special char")){
+                    pRegist.fillRegFields(data.get("alfanumericSym"), fieldName);
+                }else if (name.equalsIgnoreCase("one char")){
+                    pRegist.fillRegFields(data.get("latin1"), fieldName);
+                }else if (name.equalsIgnoreCase("max 6 char")){
+                    pRegist.fillRegFields(data.get("max6"), fieldName);
+                }else if (name.equalsIgnoreCase("max 7 char")){
+                    pRegist.fillRegFields(data.get("max7"), fieldName);
+                }else if (name.equalsIgnoreCase("whitespaces")){
+                    pRegist.fillRegFields(data.get("whiteSpace"), fieldName);
+                }else if (name.equalsIgnoreCase("group code")){
+                    pRegist.fillRegFields(data.get("rGroup"), fieldName);
+                }
                 break;
             case "password":
-                pRegist.fillRegFields(data.get("validPass"), fieldName);
+                if (name.equalsIgnoreCase("alphanumeric and special char")){
+                    pRegist.fillRegFields(data.get("alfanumericSym"), fieldName);
+                }else if (name.equalsIgnoreCase("minimum 5 characters")){
+                    pRegist.fillRegFields(data.get("min5"), fieldName);
+                }else if (name.equalsIgnoreCase("less then 5 char")){
+                    pRegist.fillRegFields(data.get("min4"), fieldName);
+                }else if (name.equalsIgnoreCase("max 32 characters")){
+                    pRegist.fillRegFields(data.get("max32"), fieldName);
+                }else if (name.equalsIgnoreCase("max 33 characters")){
+                    pRegist.fillRegFields(data.get("max33"), fieldName);
+                }else if (name.equalsIgnoreCase("whitespaces")){
+                    pRegist.fillRegFields(data.get("whiteSpace"), fieldName);
+                }
                 break;
             case "confirm password":
-                pRegist.fillRegFields(data.get("validPass"), fieldName);
+                if (name.equalsIgnoreCase("minimum 5 characters")){
+                    pRegist.fillRegFields(data.get("min5"), fieldName);
+                }else if (name.equalsIgnoreCase("alphanumeric and special char")) {
+                    pRegist.fillRegFields(data.get("alfanumericSym"), fieldName);
+                }else if (name.equalsIgnoreCase("less then 5 char")) {
+                    pRegist.fillRegFields(data.get("min4"), fieldName);
+                }else if (name.equalsIgnoreCase("max 32 characters")){
+                    pRegist.fillRegFields(data.get("max32"), fieldName);
+                }else if (name.equalsIgnoreCase("max 33 characters")){
+                    pRegist.fillRegFields(data.get("max33"), fieldName);
+                }else if (name.equalsIgnoreCase("whitespaces")){
+                    pRegist.fillRegFields(data.get("whiteSpace"), fieldName);
+                }
                 break;
             default:
                 throw new RuntimeException("provided incorrect field");
