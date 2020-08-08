@@ -8,7 +8,7 @@ supportedOsList:
   - mac
   - win
 admin:
-  email: assessment.portnov@gmail.com
+  email: qa.sofi@gmail.com
   password: 12345
 dataBaseUrl: "jdbc:mysql://24.4.202.10:3307/application"
 dataBaseUser: "testuser"

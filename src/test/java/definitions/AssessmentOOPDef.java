@@ -267,17 +267,19 @@ public class AssessmentOOPDef {
         assertThat(pRegist.errMessageBar()).isTrue();
     }
 
-    @Given("I do API loging as {string}")
-    public void iDoAPILogingAs(String user) {
+    @Given("I do API logging as {string}")
+    public void iDoAPILoggingAs(String user) {
         Map<String, String> role = new HashMap<>();
         if (user.contains("teacher")){
             role.put("email", data.get("validTeacherEmail"));
             role.put("password", data.get("validPass"));
             sendRequest.loginAPI(role);
         }else if (user.contains("student")){
-            role.put("email", data.get("validStudentEmail"));
+            role.put("email", data.get("validStudentEmail0"));
             role.put("password", data.get("validPass"));
             sendRequest.loginAPI(role);
+        }else if(user.contains("admin")){
+            sendRequest.loginAPI(getConfig().admin);
         }
     }
 
@@ -291,7 +293,6 @@ public class AssessmentOOPDef {
             newUser.put("group", data.get("rGroup"));
             sendRequest.registrationAPI(newUser);
             sendRequest.activateUserAPI(data.get("rMailT"));
-            iDoAPILogingAs("teacher");
             newUser.clear();
             newUser.put("role", data.get("roleTeacher"));
             sendRequest.changeUserRoleAPI(data.get("rMailT"), newUser);
@@ -307,7 +308,6 @@ public class AssessmentOOPDef {
 
     @And("I do API delete {string}")
     public void iDoAPIDelete(String user) {
-        iDoAPILogingAs("teacher");
         if (user.contains("teacher")){
             sendRequest.deleteUserAPI(data.get("rMailT"));
         }else if(user.contains("student")) {
