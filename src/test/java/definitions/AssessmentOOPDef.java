@@ -4,7 +4,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.*;
 import support.QueryDB;
@@ -20,13 +19,14 @@ public class AssessmentOOPDef {
     Login pLogin = new Login();
     Registration pRegist = new Registration();
     SideMenu menu = new SideMenu();
+    RestApiRequests sendRequest = new RestApiRequests();
 
     private Map<String, String> data = getData("fieldsTestData");
 
     @Given("I run script")
     public void iRunScript() {
         QueryDB doQuery = new QueryDB();
-        String res = doQuery.getDBQuery("SELECT * FROM users WHERE ID = 7754;", "activationCode");
+        String res = doQuery.getDBQuery("SELECT * FROM users WHERE email = 'anattkon@mail.com';", "activationCode");
         System.out.println(res);
     }
 
@@ -41,6 +41,7 @@ public class AssessmentOOPDef {
                 break;
         }
     }
+
 //LOGIN STEPS
     @When("I type {string} into email field")
     public void iTypeIntoEmailField(String mails) {
@@ -132,7 +133,6 @@ public class AssessmentOOPDef {
             default:
                 throw new RuntimeException("provided incorrect message");
         }
-
     }
 
 //REGISTRATION STEPS
@@ -273,15 +273,45 @@ public class AssessmentOOPDef {
         if (user.contains("teacher")){
             role.put("email", data.get("validTeacherEmail"));
             role.put("password", data.get("validPass"));
-            new RestApiRequests().loginAPI(role);
+            sendRequest.loginAPI(role);
         }else if (user.contains("student")){
             role.put("email", data.get("validStudentEmail"));
             role.put("password", data.get("validPass"));
-            new RestApiRequests().loginAPI(role);
+            sendRequest.loginAPI(role);
         }
     }
 
     @When("I do API registration a new {string}")
-    public void iDoAPIRegistrationANew(String arg0) {
+    public void iDoAPIRegistrationANew(String user) {
+        Map<String, String> newUser = new HashMap<>();
+        if (user.contains("teacher")){
+            newUser.put("email", data.get("rMailT"));
+            newUser.put("password", data.get("validPass"));
+            newUser.put("name", data.get("rFullNameT"));
+            newUser.put("group", data.get("rGroup"));
+            sendRequest.registrationAPI(newUser);
+            sendRequest.activateUserAPI(data.get("rMailT"));
+            iDoAPILogingAs("teacher");
+            newUser.clear();
+            newUser.put("role", data.get("roleTeacher"));
+            sendRequest.changeUserRoleAPI(data.get("rMailT"), newUser);
+        }else if (user.contains("student")){
+            newUser.put("email", data.get("rMailS"));
+            newUser.put("password", data.get("validPass"));
+            newUser.put("name", data.get("rFullNameS"));
+            newUser.put("group", data.get("rGroup"));
+            sendRequest.registrationAPI(newUser);
+            sendRequest.activateUserAPI(data.get("rMailS"));
+        }
+    }
+
+    @And("I do API delete {string}")
+    public void iDoAPIDelete(String user) {
+        iDoAPILogingAs("teacher");
+        if (user.contains("teacher")){
+            sendRequest.deleteUserAPI(data.get("rMailT"));
+        }else if(user.contains("student")) {
+            sendRequest.deleteUserAPI(data.get("rMailS"));
+        }
     }
 }
