@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.*;
 import support.QueryDB;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -220,6 +221,8 @@ public class AssessmentOOPDef {
                     pRegist.fillRegFields(data.get("max33"), fieldName);
                 }else if (name.equalsIgnoreCase("whitespaces")){
                     pRegist.fillRegFields(data.get("whiteSpace"), fieldName);
+                }else if (name.equalsIgnoreCase("valid password")){
+                    pRegist.fillRegFields(data.get("validPass"), fieldName);
                 }
                 break;
             case "confirm password":
@@ -235,6 +238,8 @@ public class AssessmentOOPDef {
                     pRegist.fillRegFields(data.get("max33"), fieldName);
                 }else if (name.equalsIgnoreCase("whitespaces")){
                     pRegist.fillRegFields(data.get("whiteSpace"), fieldName);
+                }else if (name.equalsIgnoreCase("valid password")){
+                    pRegist.fillRegFields(data.get("validPass"), fieldName);
                 }
                 break;
             default:
@@ -260,5 +265,23 @@ public class AssessmentOOPDef {
     @Then("Message {string} appears on the bottom")
     public void messageAppearsOnTheBottom(String message) {
         assertThat(pRegist.errMessageBar()).isTrue();
+    }
+
+    @Given("I do API loging as {string}")
+    public void iDoAPILogingAs(String user) {
+        Map<String, String> role = new HashMap<>();
+        if (user.contains("teacher")){
+            role.put("email", data.get("validTeacherEmail"));
+            role.put("password", data.get("validPass"));
+            new RestApiRequests().loginAPI(role);
+        }else if (user.contains("student")){
+            role.put("email", data.get("validStudentEmail"));
+            role.put("password", data.get("validPass"));
+            new RestApiRequests().loginAPI(role);
+        }
+    }
+
+    @When("I do API registration a new {string}")
+    public void iDoAPIRegistrationANew(String arg0) {
     }
 }

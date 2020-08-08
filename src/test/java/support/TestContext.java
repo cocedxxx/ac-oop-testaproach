@@ -30,6 +30,8 @@ public class TestContext {
 
     private static WebDriver driver;
 
+    private static Map<String, Object> testData = new HashMap<>();
+
     public static WebDriver getDriver(){
         return driver;
     }
@@ -49,6 +51,15 @@ public class TestContext {
         );
         return result;
     }
+
+    public static Actions getActions(){
+        return new Actions(driver);
+    }
+    public static JavascriptExecutor getExecuter() {
+        return (JavascriptExecutor) getDriver();
+    }
+
+    // TEST DATA MANIPULATION ---------------------------------------------------------------------------------
     public static Map<String, String > getData(String fileName){
         try{
             String path = System.getProperty("user.dir") + "/src/test/resources/data/" + fileName + ".yml";
@@ -63,24 +74,29 @@ public class TestContext {
             return null;
         }
     }
-
-
-//    private static String timestamp;
+    //    private static String timestamp;
 //    private static Map<String,Object> testData = new HashMap<>();
 
-
-
-//    public static void setTimestamp(){
+    //    public static void setTimestamp(){
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("+yyyy-MM-dd-h-mm-sss");
 //        timestamp = dateFormat.format(new Date());
 //    }
 //    public static String getTimestamp(){
 //        return timestamp;
 //    }
-    public static Actions getActions(){
-        return new Actions(driver);
+    public static void setTestData(String key, Object value){
+        testData.put(key, value);
     }
-
+    public static Map<String, Object> getTestDataMap(String key){
+        return (Map<String, Object>) testData.get(key);
+    }
+    public static String getTestDataString(String key){
+        return (String) testData.get(key);
+    }
+    public static Integer getTestDataInteger(String key){
+        return (Integer) testData.get(key);
+    }
+//  ENVIRONMENT SET UP -----------------------------------------------------------------------------------------
     public static Config getConfig(){
         try {
             String configPath = System.getProperty("user.dir") + "/src/test/resources/data/config.yml";
@@ -88,9 +104,6 @@ public class TestContext {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
-    public static JavascriptExecutor getExecuter() {
-        return (JavascriptExecutor) getDriver();
     }
 
     public static void initialize() {

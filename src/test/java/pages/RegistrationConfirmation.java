@@ -13,8 +13,9 @@ public class RegistrationConfirmation extends Registration{
     @FindBy(xpath = "//*[contains(text(),'Back to Login')]/..")
     private WebElement buttonBackToLogin;
 
-    public void clickBackToLogin(){
+    public Login clickBackToLogin(){
         buttonBackToLogin.click();
+        return new Login();
     }
 
     public Boolean isRegisConfirm(){

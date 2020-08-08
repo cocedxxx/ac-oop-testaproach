@@ -70,6 +70,11 @@ public class Login extends Page {
         getWait().until(driver -> errMessageForPasswordField.isDisplayed());
         return errMessageForPasswordField.getText();
     }
+    public void loginAs(String role){
+        enterEmail(role)
+                .enterPass(role)
+                .signIn();
+    }
 
 
 }
