@@ -16,6 +16,8 @@ public class RestApiRequests {
     private static String loginToken;
     private static String loginId;
 
+    QueryDB userInf = new QueryDB();
+
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String JSON = "application/json";
     public static final String AUTH = "authorization";
@@ -65,8 +67,7 @@ public class RestApiRequests {
         return results;
 
     }
-    public void activateUser(String userEmail){
-        QueryDB userInf = new QueryDB();
+    public void activateUserAPI(String userEmail){
         String actCode = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "activationCode");
         String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
         RestAssured
@@ -81,8 +82,7 @@ public class RestApiRequests {
                 .statusCode(200);
     }
 
-    public void changeUserRole(String userEmail, Map<String, String> role){
-        QueryDB userInf = new QueryDB();
+    public void changeUserRoleAPI(String userEmail, Map<String, String> role){
         String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
         RestAssured
                 .given()
@@ -94,6 +94,21 @@ public class RestApiRequests {
                 .body(role)
                 .when()
                 .put()
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
+
+    public void deleteUserAPI(String userEmail){
+        String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
+        RestAssured
+                .given()
+                .log().all()
+                .baseUri(baseUrl)
+                .basePath("/users/" + userId)
+                .header(AUTH, loginToken)
+                .when()
+                .delete()
                 .then()
                 .log().all()
                 .statusCode(200);

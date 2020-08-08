@@ -4,7 +4,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.*;
 import support.QueryDB;
@@ -42,6 +41,7 @@ public class AssessmentOOPDef {
                 break;
         }
     }
+
 //LOGIN STEPS
     @When("I type {string} into email field")
     public void iTypeIntoEmailField(String mails) {
@@ -133,7 +133,6 @@ public class AssessmentOOPDef {
             default:
                 throw new RuntimeException("provided incorrect message");
         }
-
     }
 
 //REGISTRATION STEPS
@@ -291,21 +290,28 @@ public class AssessmentOOPDef {
             newUser.put("name", data.get("rFullNameT"));
             newUser.put("group", data.get("rGroup"));
             sendRequest.registrationAPI(newUser);
-            sendRequest.activateUser(data.get("rMailT"));
-            newUser.put("email", data.get("validTeacherEmail"));
-            newUser.put("password", data.get("validPass"));
-            sendRequest.loginAPI(newUser);
+            sendRequest.activateUserAPI(data.get("rMailT"));
+            iDoAPILogingAs("teacher");
             newUser.clear();
             newUser.put("role", data.get("roleTeacher"));
-            sendRequest.changeUserRole(data.get("rMailT"), newUser);
+            sendRequest.changeUserRoleAPI(data.get("rMailT"), newUser);
         }else if (user.contains("student")){
             newUser.put("email", data.get("rMailS"));
             newUser.put("password", data.get("validPass"));
             newUser.put("name", data.get("rFullNameS"));
             newUser.put("group", data.get("rGroup"));
             sendRequest.registrationAPI(newUser);
-            sendRequest.activateUser(data.get("rMailS"));
+            sendRequest.activateUserAPI(data.get("rMailS"));
         }
+    }
 
+    @And("I do API delete {string}")
+    public void iDoAPIDelete(String user) {
+        iDoAPILogingAs("teacher");
+        if (user.contains("teacher")){
+            sendRequest.deleteUserAPI(data.get("rMailT"));
+        }else if(user.contains("student")) {
+            sendRequest.deleteUserAPI(data.get("rMailS"));
+        }
     }
 }
