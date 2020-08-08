@@ -1,0 +1,16 @@
+!!support.Config
+browser: chrome
+isHeadless: false
+implicitTimeout: 5
+pageLoadTimeout: 300
+explicitTimeout: 5
+supportedOsList:
+  - mac
+  - win
+admin:
+  email: assessment.portnov@gmail.com
+  password: 12345
+dataBaseUrl: "jdbc:mysql://24.4.202.10:3307/application"
+dataBaseUser: "testuser"
+dataBasePass: "password"
+baseApiUrl: "http://ask-stage.portnov.com/api/v1"
