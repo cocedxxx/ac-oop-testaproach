@@ -3,13 +3,11 @@ package pages;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.junit.runner.Request;
 import support.QueryDB;
 
 import java.util.Map;
 
-import static support.TestContext.getConfig;
-import static support.TestContext.setTestData;
+import static support.TestContext.*;
 
 public class RestApiRequests {
     private String baseUrl = getConfig().baseApiUrl;
@@ -83,6 +81,7 @@ public class RestApiRequests {
     }
 
     public void changeUserRoleAPI(String userEmail, Map<String, String> role){
+        loginAPI(getConfig().admin);
         String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
         RestAssured
                 .given()
@@ -100,6 +99,7 @@ public class RestApiRequests {
     }
 
     public void deleteUserAPI(String userEmail){
+        loginAPI(getConfig().admin);
         String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
         RestAssured
                 .given()
