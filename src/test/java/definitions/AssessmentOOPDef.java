@@ -314,4 +314,18 @@ public class AssessmentOOPDef {
             sendRequest.deleteUserAPI(data.get("rMailS"));
         }
     }
+
+    @And("I do API change of student group")
+    public void iDoAPIChangeOfStudentGroup() {
+        Map<String, String> newGroup = new HashMap<>();
+        newGroup.put("group", data.get("groupABC"));
+        sendRequest.changeUserGroupAPI(data.get("rMailS"), newGroup);
+    }
+
+    @And("I do API change of student name")
+    public void iDoAPIChangeOfStudentName() {
+        Map<String, String> newName = new HashMap<>();
+        newName.put("name", data.get("newNameS"));
+        sendRequest.changeUserNameAPI(data.get("rMailS"), newName);
+    }
 }

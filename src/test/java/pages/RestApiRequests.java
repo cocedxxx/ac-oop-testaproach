@@ -80,6 +80,22 @@ public class RestApiRequests {
                 .statusCode(200);
     }
 
+    public void deleteUserAPI(String userEmail){
+        loginAPI(getConfig().admin);
+        String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
+        RestAssured
+                .given()
+                .log().all()
+                .baseUri(baseUrl)
+                .basePath("/users/" + userId)
+                .header(AUTH, loginToken)
+                .when()
+                .delete()
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
+
     public void changeUserRoleAPI(String userEmail, Map<String, String> role){
         loginAPI(getConfig().admin);
         String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
@@ -98,17 +114,37 @@ public class RestApiRequests {
                 .statusCode(200);
     }
 
-    public void deleteUserAPI(String userEmail){
+    public void changeUserGroupAPI(String userEmail, Map<String, String> group){
         loginAPI(getConfig().admin);
         String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
         RestAssured
                 .given()
                 .log().all()
                 .baseUri(baseUrl)
-                .basePath("/users/" + userId)
+                .basePath("/users/change-group/" + userId)
+                .header(CONTENT_TYPE, JSON)
                 .header(AUTH, loginToken)
+                .body(group)
                 .when()
-                .delete()
+                .put()
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
+
+    public void changeUserNameAPI(String userEmail, Map<String, String> newName){
+        loginAPI(getConfig().admin);
+        String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
+        RestAssured
+                .given()
+                .log().all()
+                .baseUri(baseUrl)
+                .basePath("/users/change-name/" + userId)
+                .header(CONTENT_TYPE, JSON)
+                .header(AUTH, loginToken)
+                .body(newName)
+                .when()
+                .put()
                 .then()
                 .log().all()
                 .statusCode(200);

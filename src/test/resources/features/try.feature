@@ -4,5 +4,7 @@ Feature: run test
 
   Scenario: API testing
 #    Given I do API logging as "admin"
-    When I do API registration a new "teacher"
+#    When I do API registration a new "student"
 #    And I do API delete "teacher"
+#    And I do API change of student group
+    And I do API change of student name
