@@ -13,4 +13,4 @@ admin:
 dataBaseUrl: "jdbc:mysql://24.4.202.10:3307/application"
 dataBaseUser: "testuser"
 dataBasePass: "password"
-baseApiUrl: "http://ask-qa.portnov.com/api/v1"
+baseApiUrl: "http://ask-stage.portnov.com/api/v1"

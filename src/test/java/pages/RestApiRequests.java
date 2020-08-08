@@ -21,7 +21,6 @@ public class RestApiRequests {
     public static final String AUTH = "authorization";
 
     public void loginAPI(Map<String, String > user){
-        System.out.println("PAYLOAD" + user);
         RequestSpecification request = RestAssured
                 .given()
                 .log().all()
@@ -39,10 +38,9 @@ public class RestApiRequests {
                 .extract()
                 .jsonPath()
                 .getMap("");
-        loginToken = "Bearer" + result.get("token");
+        loginToken = "Bearer " + result.get("token");
         Map<String, Object> resp = (Map<String, Object>)result.get("user");
         loginId = resp.get("id").toString();
-        System.out.println(loginId +" "+ loginToken);
     }
 
     public Map<String, Object> registrationAPI(Map<String, String> user){
@@ -52,7 +50,6 @@ public class RestApiRequests {
                 .baseUri(baseUrl)
                 .basePath("/sign-up")
                 .header(CONTENT_TYPE, JSON)
-                .header(AUTH, loginToken)
                 .body(user);
         Response response = request
                 .when()
@@ -70,15 +67,33 @@ public class RestApiRequests {
     }
     public void activateUser(String userEmail){
         QueryDB userInf = new QueryDB();
-        String actCode = userInf.getDBQuery("SELECT * FROM users WHERE email = "+ userEmail +";", "activationCode");
-        String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = "+ userEmail +";", "id");
+        String actCode = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "activationCode");
+        String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
         RestAssured
                 .given()
                 .log().all()
                 .baseUri(baseUrl)
-                .basePath("/activate/:" + userId + "/:" + actCode)
+                .basePath("/activate/" + userId + "/" + actCode)
                 .when()
                 .get()
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
+
+    public void changeUserRole(String userEmail, Map<String, String> role){
+        QueryDB userInf = new QueryDB();
+        String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = '"+ userEmail +"';", "id");
+        RestAssured
+                .given()
+                .log().all()
+                .baseUri(baseUrl)
+                .basePath("/users/change-role/" + userId)
+                .header(CONTENT_TYPE, JSON)
+                .header(AUTH, loginToken)
+                .body(role)
+                .when()
+                .put()
                 .then()
                 .log().all()
                 .statusCode(200);

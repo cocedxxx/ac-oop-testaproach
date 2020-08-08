@@ -20,13 +20,14 @@ public class AssessmentOOPDef {
     Login pLogin = new Login();
     Registration pRegist = new Registration();
     SideMenu menu = new SideMenu();
+    RestApiRequests sendRequest = new RestApiRequests();
 
     private Map<String, String> data = getData("fieldsTestData");
 
     @Given("I run script")
     public void iRunScript() {
         QueryDB doQuery = new QueryDB();
-        String res = doQuery.getDBQuery("SELECT * FROM users WHERE mail = rsfd@fdg.dfs;", "activationCode");
+        String res = doQuery.getDBQuery("SELECT * FROM users WHERE email = 'anattkon@mail.com';", "activationCode");
         System.out.println(res);
     }
 
@@ -273,31 +274,37 @@ public class AssessmentOOPDef {
         if (user.contains("teacher")){
             role.put("email", data.get("validTeacherEmail"));
             role.put("password", data.get("validPass"));
-            new RestApiRequests().loginAPI(role);
+            sendRequest.loginAPI(role);
         }else if (user.contains("student")){
             role.put("email", data.get("validStudentEmail"));
             role.put("password", data.get("validPass"));
-            new RestApiRequests().loginAPI(role);
+            sendRequest.loginAPI(role);
         }
     }
 
     @When("I do API registration a new {string}")
     public void iDoAPIRegistrationANew(String user) {
-        Map<String, String> role = new HashMap<>();
+        Map<String, String> newUser = new HashMap<>();
         if (user.contains("teacher")){
-            role.put("email", data.get("rMailT"));
-            role.put("password", data.get("validPass"));
-            role.put("name", data.get("rFullNameT"));
-            role.put("group", data.get("rGroup"));
-            new RestApiRequests().loginAPI(role);
-            new RestApiRequests().activateUser(data.get("rMailT"));
+            newUser.put("email", data.get("rMailT"));
+            newUser.put("password", data.get("validPass"));
+            newUser.put("name", data.get("rFullNameT"));
+            newUser.put("group", data.get("rGroup"));
+            sendRequest.registrationAPI(newUser);
+            sendRequest.activateUser(data.get("rMailT"));
+            newUser.put("email", data.get("validTeacherEmail"));
+            newUser.put("password", data.get("validPass"));
+            sendRequest.loginAPI(newUser);
+            newUser.clear();
+            newUser.put("role", data.get("roleTeacher"));
+            sendRequest.changeUserRole(data.get("rMailT"), newUser);
         }else if (user.contains("student")){
-            role.put("email", data.get("rMailS"));
-            role.put("password", data.get("validPass"));
-            role.put("name", data.get("rFullNameS"));
-            role.put("group", data.get("rGroup"));
-            new RestApiRequests().registrationAPI(role);
-            new RestApiRequests().activateUser(data.get("rMailT"));
+            newUser.put("email", data.get("rMailS"));
+            newUser.put("password", data.get("validPass"));
+            newUser.put("name", data.get("rFullNameS"));
+            newUser.put("group", data.get("rGroup"));
+            sendRequest.registrationAPI(newUser);
+            sendRequest.activateUser(data.get("rMailS"));
         }
 
     }
