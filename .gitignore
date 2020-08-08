@@ -1,6 +1,5 @@
 .idea/
 *.iml
-*.yml
 chromedriver
 chromedriver.exe
 geckodriver
