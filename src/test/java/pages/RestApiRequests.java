@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.runner.Request;
+import support.QueryDB;
 
 import java.util.Map;
 
@@ -66,5 +67,20 @@ public class RestApiRequests {
         setTestData("NewUser", results);
         return results;
 
+    }
+    public void activateUser(String userEmail){
+        QueryDB userInf = new QueryDB();
+        String actCode = userInf.getDBQuery("SELECT * FROM users WHERE email = "+ userEmail +";", "activationCode");
+        String userId = userInf.getDBQuery("SELECT * FROM users WHERE email = "+ userEmail +";", "id");
+        RestAssured
+                .given()
+                .log().all()
+                .baseUri(baseUrl)
+                .basePath("/activate/:" + userId + "/:" + actCode)
+                .when()
+                .get()
+                .then()
+                .log().all()
+                .statusCode(200);
     }
 }

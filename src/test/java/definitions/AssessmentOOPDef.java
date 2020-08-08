@@ -26,7 +26,7 @@ public class AssessmentOOPDef {
     @Given("I run script")
     public void iRunScript() {
         QueryDB doQuery = new QueryDB();
-        String res = doQuery.getDBQuery("SELECT * FROM users WHERE ID = 7754;", "activationCode");
+        String res = doQuery.getDBQuery("SELECT * FROM users WHERE mail = rsfd@fdg.dfs;", "activationCode");
         System.out.println(res);
     }
 
@@ -282,6 +282,23 @@ public class AssessmentOOPDef {
     }
 
     @When("I do API registration a new {string}")
-    public void iDoAPIRegistrationANew(String arg0) {
+    public void iDoAPIRegistrationANew(String user) {
+        Map<String, String> role = new HashMap<>();
+        if (user.contains("teacher")){
+            role.put("email", data.get("rMailT"));
+            role.put("password", data.get("validPass"));
+            role.put("name", data.get("rFullNameT"));
+            role.put("group", data.get("rGroup"));
+            new RestApiRequests().loginAPI(role);
+            new RestApiRequests().activateUser(data.get("rMailT"));
+        }else if (user.contains("student")){
+            role.put("email", data.get("rMailS"));
+            role.put("password", data.get("validPass"));
+            role.put("name", data.get("rFullNameS"));
+            role.put("group", data.get("rGroup"));
+            new RestApiRequests().registrationAPI(role);
+            new RestApiRequests().activateUser(data.get("rMailT"));
+        }
+
     }
 }

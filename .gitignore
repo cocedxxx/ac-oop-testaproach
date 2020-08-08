@@ -1,6 +1,6 @@
 .idea/
-target/
 *.iml
+*.yml
 chromedriver
 chromedriver.exe
 geckodriver
@@ -8,3 +8,4 @@ geckodriver.exe
 workspace.xml
 README.md
 dependency-reduced-pom.xml
+/target/
