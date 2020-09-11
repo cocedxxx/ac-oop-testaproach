@@ -5,7 +5,7 @@ Feature: Registration - Email
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "group code" into "group code" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field
@@ -16,11 +16,25 @@ Feature: Registration - Email
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
+#    skip email
     And I type "group code" into "group code" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field
     And I click Register Me button
     Then Message "This field is required" appears
+    
+  Scenario: Registration - Email - existing Email
+    Given I do API registration a new "student"
+    And I open "registration" page
+    When I type "first name" into "first name" field
+    And I type "last name" into "last name" field
+    And I type "mail" into "email" field
+    And I type "group code" into "group code" field
+    And I type "valid password" into "password" field
+    And I type "valid password" into "confirm password" field
+    And I click Register Me button
+    Then Message "User already exists and activated" appears on the bottom
+    And I do API delete "student"
 
 
   Scenario: ACJ-163.Registration - Email - max char(64) in Local part of email
@@ -49,7 +63,7 @@ Feature: Registration - Email
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "email max char 63 for sever domain" into "email" field
+    And I type "email max char 63 for server domain" into "email" field
     And I type "group code" into "group code" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field

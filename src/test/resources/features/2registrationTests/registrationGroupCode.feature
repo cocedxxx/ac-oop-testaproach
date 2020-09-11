@@ -4,7 +4,7 @@ Feature: Registration - Group code
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "alphanumeric char" into "group code" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field
@@ -15,7 +15,7 @@ Feature: Registration - Group code
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "alphanumeric with special char" into "group code" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field
@@ -26,7 +26,7 @@ Feature: Registration - Group code
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field
     And I click Register Me button
@@ -36,7 +36,7 @@ Feature: Registration - Group code
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "one char" into "group code" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field
@@ -48,7 +48,7 @@ Feature: Registration - Group code
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "max 6 char" into "group code" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field
@@ -60,7 +60,7 @@ Feature: Registration - Group code
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "max 7 char" into "group code" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field
@@ -72,7 +72,7 @@ Feature: Registration - Group code
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "whitespaces" into "group code" field
     And I type "valid password" into "password" field
     And I type "valid password" into "confirm password" field
