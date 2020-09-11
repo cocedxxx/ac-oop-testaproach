@@ -19,9 +19,9 @@ public class QueryDB {
         Statement statment = null;
         ResultSet result = null;
 
-        String url = getConfig().dataBaseUrl;
-        String user = getConfig().dataBaseUser;
-        String password = getConfig().dataBasePass;
+        String url = getConfig().dBQAUrl;
+        String user = getConfig().dBQAUser;
+        String password = getConfig().dBQAPass;
         try{
             conection = DriverManager.getConnection(url, user, password);
             statment = conection.createStatement();
@@ -34,7 +34,7 @@ public class QueryDB {
 //            Logger lgr = Logger.getLogger(Version.class.getName());
 //            lgr.log(Level.SEVERE, ex.getMessage(), ex);
 
-            System.out.println("An error Maybe username or password invalid");
+            System.out.println("DataBase An error, Maybe username or password invalid");
             ex.printStackTrace();
         } finally {
             try {

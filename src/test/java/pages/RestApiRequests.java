@@ -10,7 +10,7 @@ import java.util.Map;
 import static support.TestContext.*;
 
 public class RestApiRequests {
-    private String baseUrl = getConfig().baseApiUrl;
+    private String baseUrl = getConfig().baseApiQAUrl;
     private static String loginToken;
     private static String loginId;
 
@@ -20,7 +20,7 @@ public class RestApiRequests {
     public static final String JSON = "application/json";
     public static final String AUTH = "authorization";
 
-    public void loginAPI(Map<String, String > user){
+    public void loginAPI(Map<String, String> user){
         RequestSpecification request = RestAssured
                 .given()
                 .log().all()

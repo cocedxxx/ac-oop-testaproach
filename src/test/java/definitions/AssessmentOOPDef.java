@@ -42,12 +42,12 @@ public class AssessmentOOPDef {
         }
     }
 
-//LOGIN STEPS
+//LOGIN STEPS ------------------------------------------------------------------------------
     @When("I type {string} into email field")
     public void iTypeIntoEmailField(String mails) {
         switch (mails){
             case "valid mail":
-                String mail = data.get("validTeacherEmail");
+                String mail = data.get("rMailT");
                 pLogin.enterEmail(mail);
                 break;
             case "invalid mail":
@@ -55,7 +55,7 @@ public class AssessmentOOPDef {
                 pLogin.enterEmail(mailInv);
                 break;
             case "invalid mail format":
-                String mailInvFormat = data.get("emailInvFormat");
+                String mailInvFormat = data.get("emailInvAt");
                 pLogin.enterEmail(mailInvFormat);
                 break;
             case "spaces into":
@@ -109,8 +109,7 @@ public class AssessmentOOPDef {
         switch (message){
             case "user Information":
                 getWait().until(ExpectedConditions.visibilityOf(menu.userInformation()));
-                String userName = data.get("firstName") + " " + data.get("secondName");
-                assertThat(menu.userInformation().getText()).contains(userName);
+                assertThat(menu.userInformation().getText()).contains(data.get("rFullNameT"));
                 break;
             case "Should be a valid email address error message":
                 assertThat(pLogin.errMessageEmail()).isEqualTo(data.get("emailErrValidAddress"));
@@ -141,7 +140,7 @@ public class AssessmentOOPDef {
     public void iTypeIntoField(String name, String fieldName) {
         switch (fieldName){
             case "first name":
-                if (name.contains("latin characters")){
+                if (name.equalsIgnoreCase("latin characters")){
                     pRegist.fillRegFields(data.get("latin"), fieldName);
                 }else if (name.equalsIgnoreCase("one char")){
                     pRegist.fillRegFields(data.get("latin1"), fieldName);
@@ -169,7 +168,7 @@ public class AssessmentOOPDef {
                 }
                 break;
             case "email":
-                if (name.equalsIgnoreCase("valid mail")) {
+                if (name.equalsIgnoreCase("mail")) {
                     pRegist.fillRegFields(data.get("rMail"), fieldName);
                 }else if (name.equalsIgnoreCase("email max char 64")) {
                     pRegist.fillRegFields(data.get("emailLocalLeft64"), fieldName);
@@ -264,7 +263,7 @@ public class AssessmentOOPDef {
 
     @Then("Message {string} appears on the bottom")
     public void messageAppearsOnTheBottom(String message) {
-        assertThat(pRegist.errMessageBar()).isTrue();
+        assertThat(pRegist.errMessageBar(message)).isTrue();
     }
 
     @Given("I do API logging as {string}")
@@ -309,7 +308,7 @@ public class AssessmentOOPDef {
     @And("I do API delete {string}")
     public void iDoAPIDelete(String user) {
         if (user.contains("teacher")){
-            sendRequest.deleteUserAPI(data.get("rMailT"));
+            sendRequest.deleteUserAPI(data.get("validTeacherEmail"));
         }else if(user.contains("student")) {
             sendRequest.deleteUserAPI(data.get("rMailS"));
         }

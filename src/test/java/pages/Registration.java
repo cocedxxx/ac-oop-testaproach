@@ -24,8 +24,9 @@ public class Registration extends Page {
     @FindBy(xpath = "//mat-error[@role='alert']")
     private WebElement errMessage;
 
-    @FindBy(xpath = "//snack-bar-container[@role='alert']/.//*[contains(text(),'Data too long')]")
-    private WebElement barMessage;
+    private WebElement barMessage(String textMessage){
+        return getDriver().findElement(By.xpath("//snack-bar-container[@role='alert']/.//*[contains(text(),'"+textMessage+"')]"));
+    }
 
     private WebElement regisFields(String nameOfField) {
         return getDriver().findElement(By.xpath("//*[contains(@placeholder,'" + nameOfField + "')]"));
@@ -46,8 +47,8 @@ public class Registration extends Page {
         return errMessage.getText();
     }
 
-    public boolean errMessageBar(){
-        getWait().until(driver -> barMessage.isDisplayed());
+    public boolean errMessageBar(String message){
+        getWait().until(driver -> barMessage(message).isDisplayed());
         return true;
     }
 }

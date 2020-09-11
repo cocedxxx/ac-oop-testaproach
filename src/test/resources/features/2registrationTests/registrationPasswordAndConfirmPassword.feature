@@ -4,7 +4,7 @@ Feature:Registration password/Confirm password ACJ-200
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "group code" into "group code" field
     And I type "alphanumeric and special char" into "password" field
     And I type "alphanumeric and special char" into "confirm password" field
@@ -15,7 +15,7 @@ Feature:Registration password/Confirm password ACJ-200
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "group code" into "group code" field
     And I type "alphanumeric and special char" into "confirm password" field
     And I click Register Me button
@@ -25,7 +25,7 @@ Feature:Registration password/Confirm password ACJ-200
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "group code" into "group code" field
     And I type "minimum 5 characters" into "password" field
     And I type "minimum 5 characters" into "confirm password" field
@@ -36,7 +36,7 @@ Feature:Registration password/Confirm password ACJ-200
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "group code" into "group code" field
     And I type "less then 5 char" into "password" field
     And I type "less then 5 char" into "confirm password" field
@@ -47,7 +47,7 @@ Feature:Registration password/Confirm password ACJ-200
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "group code" into "group code" field
     And I type "max 32 characters" into "password" field
     And I type "max 32 characters" into "confirm password" field
@@ -58,7 +58,7 @@ Feature:Registration password/Confirm password ACJ-200
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "group code" into "group code" field
     And I type "max 33 characters" into "password" field
     And I type "max 33 characters" into "confirm password" field
@@ -69,7 +69,7 @@ Feature:Registration password/Confirm password ACJ-200
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "group code" into "group code" field
     And I type "whitespaces" into "password" field
     And I type "whitespaces" into "confirm password" field
@@ -80,7 +80,7 @@ Feature:Registration password/Confirm password ACJ-200
     Given I open "registration" page
     When I type "first name" into "first name" field
     And I type "last name" into "last name" field
-    And I type "valid mail" into "email" field
+    And I type "mail" into "email" field
     And I type "group code" into "group code" field
     And I type "alphanumeric and special char" into "password" field
     And I type "minimum 5 characters" into "confirm password" field

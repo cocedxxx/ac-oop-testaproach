@@ -23,6 +23,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -60,6 +61,7 @@ public class TestContext {
     }
 
     // TEST DATA MANIPULATION ---------------------------------------------------------------------------------
+
     public static Map<String, String > getData(String fileName){
         try{
             String path = System.getProperty("user.dir") + "/src/test/resources/data/" + fileName + ".yml";
@@ -96,7 +98,9 @@ public class TestContext {
     public static Integer getTestDataInteger(String key){
         return (Integer) testData.get(key);
     }
+
 //  ENVIRONMENT SET UP -----------------------------------------------------------------------------------------
+
     public static Config getConfig(){
         try {
             String configPath = System.getProperty("user.dir") + "/src/test/resources/data/config.yml";
