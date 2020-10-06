@@ -9,18 +9,18 @@ supportedOsList:
   - win
 admin:
   email: qa.sofi@gmail.com
-  password: 12345
+  password:
 enviroment1: QA
 dBQAUrl: "jdbc:mysql://24.4.202.10:3309/application?serverTimezone=UTC"
 dBQAUser: "testuser"
-dBQAPass: "password"
+dBQAPass: "   "
 qAEmail: "qa.sofi@gmail.com"
-qAPass: "12345"
+qAPass: "   "
 baseApiQAUrl: "http://ask-qa.portnov.com/api/v1"
 enviroment2: staging
 dBStageUrl: "jdbc:mysql://24.4.202.10:3307/application"
 dBStageUser: "testuser"
-dBStagePass: "password"
+dBStagePass: "   "
 baseApiStageUrl: "http://ask-stage.portnov.com/api/v1"
 stageEmail: "qa.sofi@gmail.com"
-stagePass: "12345"
+stagePass: "    "
